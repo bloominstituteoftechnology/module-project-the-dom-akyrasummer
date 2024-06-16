@@ -25,12 +25,24 @@ widget1.appendChild(quote)
 //flesh out author & date
 const authorDate = document.createElement('div')
 const { author, date } = randomQuote
-console.log(author, date)
+// console.log(author, date)
 authorDate.textContent = `${author} in ${date || "an unknown date"}`
 widget1.appendChild(authorDate)
 
   // 👉 TASK 3 - Build a  `"Corporate Speak" widget
-  //  ✨ add your code here
+  // will cycle through 2 adverbs, 2 nouns, and 2 verbs
+const randomAdverb1 = adverbs[Math.floor(Math.random() * adverbs.length)]
+const randomAdverb2 = adverbs[Math.floor(Math.random() * adverbs.length)]
+const randomNoun1 = nouns[Math.floor(Math.random() * nouns.length)]
+const randomNoun2 = nouns[Math.floor(Math.random() * nouns.length)]
+const randomVerb1 = verbs[Math.floor(Math.random() * verbs.length)]
+const randomVerb2 = verbs[Math.floor(Math.random() * verbs.length)]
+
+const mumboJumbo = `We need to ${randomVerb1} our ${randomNoun1} ${randomAdverb1} in order to ${randomVerb2} our ${randomNoun2} ${randomAdverb2}.`
+const paragraph = document.createElement('p')
+paragraph.textContent = mumboJumbo
+document.querySelector(".corporatespeak").appendChild(paragraph)
+
 
   // 👉 TASK 4 - Build a "Countdown" widget
   //  ✨ add your code here
