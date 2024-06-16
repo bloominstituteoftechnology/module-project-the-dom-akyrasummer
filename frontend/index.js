@@ -6,12 +6,30 @@ function moduleProject1() {
   // 👇 WORK WORK BELOW THIS LINE 👇
 
   // 👉 TASK 1 - Add a "widget" class name to widgets so CSS kicks in
-  //  ✨ add your code here
+const widgets = document.querySelectorAll("section>div");
+widgets.forEach(widget => {
+  widget.classList.add("widget")
+});
 
-  // 👉 TASK 2 - Build a "Quote of the Day" widget
-  //  ✨ add your code here
+  // console.log(widgets)
 
-  // 👉 TASK 3 - Build a "Corporate Speak" widget
+// 👉 TASK 2 - Build a "Quote of the Day" widget
+const randomIdx = Math.floor(Math.random() * quotes.length);
+const randomQuote = quotes[randomIdx];
+// flesh out quote
+const quote = document.createElement("div") //create a div
+const quoteText = randomQuote.quote // grabs the data
+quote.textContent = quoteText //modify text content of the quote
+const widget1 = document.querySelector(".quoteoftheday")
+widget1.appendChild(quote)
+//flesh out author & date
+const authorDate = document.createElement('div')
+const { author, date } = randomQuote
+console.log(author, date)
+authorDate.textContent = `${author} in ${date || "an unknown date"}`
+widget1.appendChild(authorDate)
+
+  // 👉 TASK 3 - Build a  `"Corporate Speak" widget
   //  ✨ add your code here
 
   // 👉 TASK 4 - Build a "Countdown" widget
