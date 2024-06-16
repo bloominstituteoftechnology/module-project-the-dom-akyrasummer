@@ -64,13 +64,21 @@ countdown.textContent = `T-minus ${count}...`;
 }, 1000)
 
 
-// document.querySelector(".countdown").appendChild(countdown);
-
-
-
-
   // 👉 TASK 5 - Build a "Friends" widget
-  //  ✨ add your code here
+const friendsWidget = document.querySelector(".friends");
+
+const randomPerson = Math.floor(Math.random() * people.length);
+const friends = people[randomPerson];
+
+const person = document.createElement('div');
+
+// friend.textContent = ``
+
+
+// const randomIdx = Math.floor(Math.random() * quotes.length);
+// //   const randomQuote = quotes[randomIdx];
+// const quoteText = randomQuote.quote // grabs the data
+//   quote.textContent = quoteText //modify text content of the quote
 
   // 👉 TASK 6 - Make it so user can tab through the widgets
   //  ✨ add your code here
