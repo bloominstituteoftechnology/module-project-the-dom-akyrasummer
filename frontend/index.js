@@ -7,8 +7,9 @@ function moduleProject1() {
 
   // 👉 TASK 1 - Add a "widget" class name to widgets so CSS kicks in
   const widgets = document.querySelectorAll("section>div");
-  widgets.forEach(widget => {
+  widgets.forEach((widget, idx) => {
     widget.classList.add("widget")
+    widget.setAttribute('tabindex', idx + 1 + "")
   });
 
   // console.log(widgets)
@@ -54,23 +55,56 @@ function moduleProject1() {
 countdown.textContent = `T-minus ${count}...`
 countdownWidget.appendChild(countdown)
 
-setInterval(() => {
+const id = setInterval(() => {
   if (count === 1) {
     countdown.textContent = `Liftoff! 🚀`;
+    clearInterval(id)
   } else {
-count--;
-countdown.textContent = `T-minus ${count}...`;
+countdown.textContent = `T-minus ${--count}...`;
   }
 }, 1000)
 
 
   // 👉 TASK 5 - Build a "Friends" widget
-const friendsWidget = document.querySelector(".friends");
+// solution video code comparison
+const person = people[Math.floor(Math.random() * people.length)]
+const personParagraph = document.createElement('p')
+document.querySelector('.friends').appendChild(personParagraph)
+const year = person.dateOfBirth.split('-')[0]
+let sentence = `${person.fname} ${person.lname} was born in ${year} and `
 
-const randomPerson = Math.floor(Math.random() * people.length);
-const friends = people[randomPerson];
+if (!person.friends.length) {
+  sentence += 'has no friends.'
+} else {
+  sentence += 'is friends with '
+  for (let idx =  0; idx < person.friends.length; idx++) {
+    const friendId = person.friends[idx]
+    const friend = people.find(p => p.id === friendId)
+    const fullName = `${friend.fname} ${friend.lname}`
+    console.log(fullName)
+    let isLastIdx = idx === person.friends.length - 1
+    let isNextToLastIdx = idx === person.friends.length - 2
+    if (isLastIdx) {
+      sentence += `${fullName}.`
+    } else if (isNextToLastIdx) {
+      sentence += `${fullName} and `
+    } else {
+      sentence += `${fullName}, `
+    }
+  }
+}
 
-const person = document.createElement('div');
+personParagraph.textContent = sentence
+
+console.log(person)
+
+// my code
+//   const friendsWidget = document.querySelector(".friends");
+
+// const randomPerson = Math.floor(Math.random() * people.length);
+// const friends = people[randomPerson];
+
+// const person = document.createElement('div');
 
 // friend.textContent = ``
 
@@ -81,7 +115,21 @@ const person = document.createElement('div');
 //   quote.textContent = quoteText //modify text content of the quote
 
   // 👉 TASK 6 - Make it so user can tab through the widgets
-  //  ✨ add your code here
+  document.addEventListener('keydown', function(event) {
+    if (event.key === "Tab") {
+      const tabWidgets = Array.from(document.querySelectorAll(".h3"))
+      const focusIdx = tabWidgets.indexOf(document.body);
+      let nextIdx = event.shiftKey ? focusIdx - 1 : focusIdx + 1;
+      
+      if (nextIdx >= tabWidgets.length) {
+        nextIdx = 0;
+      } else if (nextIdx < 0) {
+        nextIdx = tabWidgets.length - 1;
+      }
+    }
+    event.preventDefault();
+    tabWidgets[nextIdx].focus();
+  })
 
   // 👆 WORK WORK ABOVE THIS LINE 👆
 }
